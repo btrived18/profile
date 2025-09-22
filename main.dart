@@ -1,230 +1,122 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyProfile());
+  runApp(const MyApp());
 }
 
-class MyProfile extends StatefulWidget {
-  const MyProfile({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
-  @override
-  State<MyProfile> createState() => _MyProfileState();
-}
-
-class _MyProfileState extends State<MyProfile> {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: DoThing(),
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        // This is the theme of your application.
+        //
+        // TRY THIS: Try running your application with "flutter run". You'll see
+        // the application has a purple toolbar. Then, without quitting the app,
+        // try changing the seedColor in the colorScheme below to Colors.green
+        // and then invoke "hot reload" (save your changes or press the "hot
+        // reload" button in a Flutter-supported IDE, or press "r" if you used
+        // the command line to start the app).
+        //
+        // Notice that the counter didn't reset back to zero; the application
+        // state is not lost during the reload. To reset the state, use hot
+        // restart instead.
+        //
+        // This works for code too, not just values: Most code changes can be
+        // tested with just a hot reload.
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
-class DoThing extends StatefulWidget {
-  const DoThing({super.key});
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+
+  // This widget is the home page of your application. It is stateful, meaning
+  // that it has a State object (defined below) that contains fields that affect
+  // how it looks.
+
+  // This class is the configuration for the state. It holds the values (in this
+  // case the title) provided by the parent (in this case the App widget) and
+  // used by the build method of the State. Fields in a Widget subclass are
+  // always marked "final".
+
+  final String title;
 
   @override
-  State<DoThing> createState() => _DoThingState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _DoThingState extends State<DoThing> {
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      // This call to setState tells the Flutter framework that something has
+      // changed in this State, which causes it to rerun the build method below
+      // so that the display can reflect the updated values. If we changed
+      // _counter without calling setState(), then the build method would not be
+      // called again, and so nothing would appear to happen.
+      _counter++;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    // This method is rerun every time setState is called, for instance as done
+    // by the _incrementCounter method above.
+    //
+    // The Flutter framework has been optimized to make rerunning build methods
+    // fast, so that you can just rebuild anything that needs updating rather
+    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Profile",
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+        // TRY THIS: Try changing the color here to a specific color (to
+        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
+        // change color while the other colors stay the same.
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        // Here we take the value from the MyHomePage object that was created by
+        // the App.build method, and use it to set our appbar title.
+        title: Text(widget.title),
+      ),
+      body: Center(
+        // Center is a layout widget. It takes a single child and positions it
+        // in the middle of the parent.
+        child: Column(
+          // Column is also a layout widget. It takes a list of children and
+          // arranges them vertically. By default, it sizes itself to fit its
+          // children horizontally, and tries to be as tall as its parent.
+          //
+          // Column has various properties to control how it sizes itself and
+          // how it positions its children. Here we use mainAxisAlignment to
+          // center the children vertically; the main axis here is the vertical
+          // axis because Columns are vertical (the cross axis would be
+          // horizontal).
+          //
+          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
+          // action in the IDE, or press "p" in the console), to see the
+          // wireframe for each widget.
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text('You have pushed the button this many times:'),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+          ],
         ),
-        elevation: 0,
-        centerTitle: true,
-        backgroundColor: Colors.pink.shade50,
-        foregroundColor: Colors.black54,
       ),
-      body: SingleChildScrollView(
-
-        physics: NeverScrollableScrollPhysics(),
-        child:
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const SizedBox(height: 15),
-          Stack(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.blue.shade300, width: 3),
-                ),
-                child: Center(
-                  child: const CircleAvatar(
-                    radius: 60.0,
-                    backgroundImage: AssetImage("assets/image6.jpg"),
-                  ),
-                ),
-              ),
-              Positioned(
-                height: 240,
-                right: 170,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(Icons.edit, color: Colors.blue, size: 20),
-                ),
-              ),
-              Center(
-                heightFactor: 10,
-                child: const Text(
-                  'Trived',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-              ),
-              const SizedBox(height: 10),
-              Center(
-                heightFactor: 17,
-                child: Text(
-                  'boddetitrived@gmail.com',
-                  style: TextStyle(fontSize: 16, color: Colors.grey[600]),
-                ),
-              ),
-              SizedBox(height: 50),
-              Positioned(
-                height: 520,
-                right: 50,
-                child:
-              Row(
-                    children: [
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        // crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-
-                          Icon(Icons.alarm,size: 30,color: Colors.orangeAccent,),
-                          SizedBox(height: 25,),
-                          Text("2h 32min",style: TextStyle(fontSize: 20,color: Colors.black),),
-                          Text("Total Time",style: TextStyle(fontWeight: FontWeight.w300,color: Colors.black26),),
-                        ],
-                      ),
-                      SizedBox(width: 40),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(Icons.local_fire_department,size: 30,color: Colors.orangeAccent,),
-                          SizedBox(height: 25,),
-                          Text("7200 cal",style: TextStyle(fontSize: 20,color: Colors.black),),
-                          Text("Burned",style: TextStyle(fontWeight: FontWeight.w300,color: Colors.black26),),
-                        ],
-                      ),
-                      SizedBox(width: 40),
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(Icons.fitness_center,size: 30,color: Colors.orangeAccent,),
-                          SizedBox(height: 25,),
-                          Text("2",style: TextStyle(fontSize: 20,color: Colors.black),),
-                          Text("Done",style: TextStyle(fontWeight: FontWeight.w300,color: Colors.black26),),
-                        ],
-                      ),
-                    ],
-                  ),
-              ),
-              Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SizedBox(height: 750,width: 30,),
-                    Icon(Icons.person_rounded,size: 30,color: Colors.orangeAccent,),
-                    SizedBox(height: 25,width: 20,),
-                    Text("Personal",style: TextStyle(fontSize: 20,color: Colors.black),),
-                    SizedBox(width: 170),
-                    Icon(Icons.chevron_right,color: Colors.black26),
-                  ],
-                ),
-
-
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            SizedBox(height: 870,width: 30,),
-                            Icon(Icons.settings_outlined,size: 30,color: Colors.orangeAccent,),
-                            SizedBox(height: 40,width: 20,),
-                            Text("General",style: TextStyle(fontSize: 20,color: Colors.black),),
-                            const SizedBox(width: 178),
-                            Icon(Icons.chevron_right,color: Colors.black26),
-                          ],
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            SizedBox(height: 980,width: 30,),
-                            Icon(Icons.notifications,size: 30,color: Colors.orangeAccent,),
-                            SizedBox(height: 25,width: 20,),
-                            Text("Notification",style: TextStyle(fontSize: 20,color: Colors.black),),
-                            const SizedBox(width: 143),
-                            Icon(Icons.chevron_right,color: Colors.black26),
-                          ],
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            SizedBox(height: 1090,width: 30,),
-                            Icon(Icons.question_mark,size: 30,color: Colors.orangeAccent,),
-                            SizedBox(height: 25,width: 20,),
-                            Text("Help",style: TextStyle(fontSize: 20,color: Colors.black),),
-                            const SizedBox(width: 201),
-                            Icon(Icons.chevron_right,color: Colors.black26),
-                          ],
-                        ),
-            SizedBox(height: 1100,),
-Row(
-
-  children: [
-    SizedBox(height: 1300,width: 35,),
-    Column(
-        children: [
-          Icon(Icons.home,color: Colors.black,),
-          Text("Home"),
-        ],
-    ),
-    SizedBox(width: 35,),
-    Column(
-      children: [
-        Icon(Icons.fitness_center_outlined,color: Colors.black,),
-        Text("Workout"),
-      ],
-    ),
-    SizedBox(width: 35,),
-    Column(
-      children: [
-        Icon(Icons.bar_chart,color: Colors.black,),
-        Text("Statistics"),
-      ],
-    ),
-    SizedBox(width: 35,),
-    Column(
-      children: [
-        Icon(Icons.person,color: Colors.black,),
-        Text("Profile"),
-      ],
-    ),
-
-  ],
-)
-            // ElevatedButton(onPressed: (){}, child: ,
-            // const <BottomNavigationBarItem>[
-            // BottomNavigationBarItem(icon: Icon(Icons.home),label: "Home",),
-            //   BottomNavigationBarItem(icon: Icon(Icons.fitness_center_outlined),label: "Workout",),
-            //   BottomNavigationBarItem(icon: Icon(Icons.bar_chart),label: "Statistics",),
-            //   BottomNavigationBarItem(icon: Icon(Icons.person),label: "Profile",),
-            // ]
-            ],
-          ),
-        ],
-      ),
-      )
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
